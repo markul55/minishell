@@ -1,23 +1,43 @@
-#include "./libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wkozlows <wiktor292929@gmail.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/04 01:14:00 by wkozlows          #+#    #+#             */
+/*   Updated: 2025/08/04 01:14:00 by wkozlows         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minishell.h"
 
-int main(int ac, char **av)
+char	*_ft_readline(void)
 {
-	if (ac == 2)
-	{
-	char *input;
+	char	*buffer;
+	char	path[BUFSIZ];
 
-    input = readline("Wpisz coś: ");
-
-	if (input = "echo")
+	buffer = NULL;
+	getcwd(path, sizeof(path));
+	printf("%s$MiniShell$>", path);
+	if (readline(buffer) == NULL)
 	{
-		printf("%s\n", av[1]);
+		buffer = NULL;
+		printf("EOF");
 	}
+	return (buffer);
+}
+
+int main(void)
+{
+	char	*line;
+
+	print_intro();
+	while ((line = _ft_readline()) != NULL)
+	{
+		line = _ft_readline();
+		printf("%s\n", line);
 	}
 	printf("\n");
-	return(0);
+	return (EXIT_SUCCESS);
 }
