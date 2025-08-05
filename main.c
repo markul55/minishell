@@ -12,19 +12,36 @@
 
 #include "minishell.h"
 
+
+//Wyświetlanie ścieżki cwd i "$minishell$"
+char	*generate_prompt(void)
+{
+	char	*prompt;
+	char	path[BUFSIZ];
+	char	*name;
+
+	name = " $minishell$> ";
+	if (getcwd(path, sizeof(path)) == NULL)
+	{
+		perror("getcwd");
+		return (NULL);
+	}
+	prompt = ft_strjoin(path, name);
+	return (prompt);
+}
+
+//Rozbudowany readline(const char *prompt)
 char	*_ft_readline(void)
 {
 	char	*buffer;
-	char	path[BUFSIZ];
+	char	*prompt;
 
-	buffer = NULL;
-	getcwd(path, sizeof(path));
-	printf("%s$MiniShell$>", path);
-	if (readline(buffer) == NULL)
+	prompt = generate_prompt();
+	if ((buffer = readline(prompt)) == NULL)
 	{
-		buffer = NULL;
-		printf("EOF");
+		printf("EOF ");
 	}
+	free(prompt);
 	return (buffer);
 }
 
@@ -33,10 +50,18 @@ int main(void)
 	char	*line;
 
 	print_intro();
-	while ((line = _ft_readline()) != NULL)
+	while (1)
 	{
 		line = _ft_readline();
-		printf("%s\n", line);
+		if (!line)
+		{
+			printf("EXIT\n");
+			break;
+		if (*line)
+			add_history(line);
+		free(line);
+		}
+
 	}
 	printf("\n");
 	return (EXIT_SUCCESS);

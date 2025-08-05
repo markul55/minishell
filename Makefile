@@ -13,7 +13,8 @@
 # === VARIABLES ===
 NAME    = minishell
 CC      = cc
-CFLAGS  = -Wall -Wextra -Werror -Ilibft
+CFLAGS  = -Wall -Wextra -Werror -I$(LIBFT_DIR)
+
 SRCS    = main.c utils.c
 OBJS    = $(SRCS:.c=.o)
 
@@ -25,10 +26,10 @@ LIBFT_A   = $(LIBFT_DIR)/libft.a
 RLFLAGS = -lreadline -lncurses
 
 # === BUILD ===
-all: $(NAME)
+all: $(LIBFT_A) $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -Llibft -lft -o $(NAME) $(OBJS) $(RLFLAGS)
+$(NAME): $(OBJS) $(LIBFT_A)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT_A) $(RLFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -39,6 +40,7 @@ $(LIBFT_A):
 # === CLEAN ===
 clean:
 	rm -f $(OBJS)
+	make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
