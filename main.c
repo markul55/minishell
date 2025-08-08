@@ -57,12 +57,14 @@ int main(void)
 		{
 			printf("EXIT\n");
 			break;
-		if (*line)
-			add_history(line);
-		free(line);
 		}
-
+		else
+		{
+			add_history(line);
+//			get_tokens(line);
+		}
+		printf("\n");
+		free(line);
 	}
-	printf("\n");
 	return (EXIT_SUCCESS);
 }
