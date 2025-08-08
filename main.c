@@ -20,7 +20,7 @@ char	*generate_prompt(void)
 	char	path[BUFSIZ];
 	char	*name;
 
-	name = " $minishell$> ";
+	name = " $piwkomuszla$> ";
 	if (getcwd(path, sizeof(path)) == NULL)
 	{
 		perror("getcwd");
@@ -48,22 +48,27 @@ char	*_ft_readline(void)
 int main(void)
 {
 	char	*line;
+	char	*com;
+
+	com = "pwd";
 
 	print_intro();
 	while (1)
 	{
 		line = _ft_readline();
 		if (!line)
+			printf("\n");
+			
+		ft_echo(line);
+		if (!ft_strncmp(line, com, 3))
 		{
-			printf("EXIT\n");
-			break;
+			ft_pwd();
 		}
 		else
 		{
 			add_history(line);
 //			get_tokens(line);
 		}
-		printf("\n");
 		free(line);
 	}
 	return (EXIT_SUCCESS);

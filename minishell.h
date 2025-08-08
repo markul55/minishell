@@ -21,5 +21,7 @@
 # include <readline/history.h>
 
 void    print_intro(void);
+void    ft_pwd(void);
+void    ft_echo(char *text);
 
 #endif

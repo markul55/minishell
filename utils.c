@@ -38,5 +38,45 @@ void    print_intro(void)
 
 // char    **get_tokens(char *line)
 // {
-//
+//     int i;
+
+//     i = 0;
+//     while (line)
+//     {
+
+//     }
 // }
+
+void    ft_pwd(void)
+{
+    char    path[BUFSIZ];
+
+    if (getcwd(path, sizeof(path)) != NULL)
+        printf("%s\n", path);
+    else
+        printf("pwd error\n");
+}
+
+void    ft_echo(char *text)
+{
+    char    *tmp;
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    tmp = 0;
+    if (text[0] == 'e' && text[1] == 'c' && text[2] == 'h' && text[3] == 'o')
+        {
+            i = 5;
+            tmp = malloc(sizeof(text) - 4);
+            while (text[i])
+            {
+                tmp[j] = text[i];
+                j++;
+                i++;
+            }
+            tmp[j] = '\0';
+        }
+    printf("%s\n", tmp);
+}
