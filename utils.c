@@ -56,20 +56,34 @@ void    ft_pwd(void)
     else
         printf("pwd error\n");
 }
-
+int    skip_spaces(char *text, int i)
+{
+    while(text[i] && text[i] <= 32)
+    {
+        i++;
+    }
+    return(i);
+}
 void    ft_echo(char *text)
 {
     char    *tmp;
+    int check_n;
     int i;
     int j;
 
     i = 0;
     j = 0;
     tmp = 0;
+    check_n = 0;
     if (text[0] == 'e' && text[1] == 'c' && text[2] == 'h' && text[3] == 'o')
         {
-            i = 5;
-            tmp = malloc(sizeof(text) - 4);
+            i = skip_spaces(text, 4);
+            if(text[i] == '-' && text[i + 1] == 'n')
+            {
+                check_n = 1;
+                i = skip_spaces(text, i + 2);
+            }
+            tmp = malloc(sizeof(char) * (strlen(text) - i + 1));
             while (text[i])
             {
                 tmp[j] = text[i];
@@ -77,6 +91,10 @@ void    ft_echo(char *text)
                 i++;
             }
             tmp[j] = '\0';
+        if(check_n == 0)
+            printf("%s\n", tmp);
+        else
+            printf("%s", tmp);
+        free(tmp);
         }
-    printf("%s\n", tmp);
 }

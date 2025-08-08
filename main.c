@@ -26,6 +26,7 @@ char	*generate_prompt(void)
 		perror("getcwd");
 		return (NULL);
 	}
+
 	prompt = ft_strjoin(path, name);
 	return (prompt);
 }
@@ -56,8 +57,8 @@ int main(void)
 	while (1)
 	{
 		line = _ft_readline();
-		if (!line)
-			printf("\n");
+		// if (!line)
+		// 	printf("\n");
 			
 		ft_echo(line);
 		if (!ft_strncmp(line, com, 3))
