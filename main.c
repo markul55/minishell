@@ -88,13 +88,14 @@ int main(void)
         for (t_list *cur = tokens; cur; cur = cur->next)
         {
             t_token *t = (t_token*)cur->content;
+            if (t)
+                printf("tokens: %s", t->value);
             if (t && t->type != T_WORD) { has_op = true; break; }
         }
         if (has_op)
-            fprintf(stderr, "minishell: pipes/redirs not implemented yet (coming soon)\n");
+           fprintf(stderr, "minishell: pipes/redirs not implemented yet (coming soon)\n");
         else
             handle_simple_command(tokens);
-
         ft_lstclear(&tokens, token_free);
         free(line);
     }

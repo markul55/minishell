@@ -18,7 +18,7 @@ t_token *token_new(t_token_type type, const char *value)
     t_token *t = (t_token*)malloc(sizeof(t_token));
     if (!t) return NULL;
     t->type = type;
-    t->value = value ? ft_strdup(value) : NULL;
+    t->value = ft_strdup(value);
     return t;
 }
 
@@ -56,7 +56,10 @@ static int read_quoted(const char *s, int i, char quote, char **buf)
         return -1;
     }
     char *piece = ft_substr(s, start, (size_t)(i - start));
-    if (!piece || append_piece(buf, piece) < 0) { free(piece); return -1; }
+    if (!piece || append_piece(buf, piece) < 0) {
+        free(piece);
+        return -1;
+    }
     free(piece);
     return i + 1; /* skip closing */
 }
@@ -97,7 +100,7 @@ t_list *tokenize(const char *line)
     if (!line) return NULL;
     while (line[i])
     {
-        i = skip_spaces(line, i);
+        i = skip_whitespace(line, i);
         if (!line[i]) break;
 
         if (line[i] == '|')
