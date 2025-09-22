@@ -38,7 +38,7 @@ void    print_intro(void)
 }
 
 /* ======================== WHITESPACE ======================== */
-int skip_whitespace(const char *text, int i)
+int skipspace(const char *text, int i)
 {
     if (!text) return i;
     while (text[i] && ft_isspace(text[i]))

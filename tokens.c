@@ -100,7 +100,7 @@ t_list *tokenize(const char *line)
     if (!line) return NULL;
     while (line[i])
     {
-        i = skip_whitespace(line, i);
+        i = skipspace(line, i);
         if (!line[i]) break;
 
         if (line[i] == '|')

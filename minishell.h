@@ -58,7 +58,7 @@ int     cmd_echo(char **argv);
 int     cmd_exit(void);
 
 /* === Utils: whitespace === */
-int     skip_whitespace(const char *text, int i);
+int     skipspace(const char *text, int i);
 
 /* === Tokens / Lexer === */
 t_token *token_new(t_token_type type, const char *value);
