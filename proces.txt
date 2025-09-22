@@ -1,0 +1,71 @@
+1. Obsługa wejścia
+
+    ft_readline() – wywołuje readline(prompt) i zwraca string z wejściem użytkownika.
+
+    ft_parse_input() – dzieli komendę na tokeny, uwzględniając:
+
+        spacje,
+
+        cudzysłowy " " i ' ',
+
+        operator | (pipe),
+
+        redirekcje <, >, >>, << (heredoc).
+
+    ft_tokenize() – zamienia input na tablicę struktur t_token (typ, wartość).
+
+    ft_expand_variables() – podmienia $VAR na wartość z env.
+
+2. Wbudowane komendy (builtins)
+
+Każda wbudowana może mieć osobną funkcję:
+
+    ft_echo() – echo [-n] ...
+
+    ft_cd() – zmiana katalogu (cd path).
+
+    ft_pwd() – drukuje aktualny katalog.
+
+    ft_export() – dodaje/ustawia zmienne środowiskowe.
+
+    ft_unset() – usuwa zmienne środowiskowe.
+
+    ft_env() – wyświetla aktualne zmienne środowiskowe.
+
+    ft_exit() – wychodzi z shell’a.
+
+3. Uruchamianie komend
+
+    ft_exec_builtin() – sprawdza, czy komenda jest wbudowana i uruchamia ją w bieżącym procesie.
+
+    ft_exec_external() – wyszukuje binarkę w $PATH i uruchamia przez execve().
+
+    ft_handle_pipe() – tworzy potok między procesami.
+
+    ft_handle_redirections() – otwiera pliki do odczytu/zapisu, przekierowuje stdin/stdout.
+
+4. Obsługa środowiska
+
+    ft_get_env(char *name) – zwraca wartość zmiennej środowiskowej.
+
+    ft_set_env(char *name, char *value) – ustawia lub nadpisuje zmienną środowiskową.
+
+    ft_copy_env(char **envp) – kopiuje początkowe envp do własnej listy/arraya.
+
+    ft_free_env() – zwalnia pamięć środowiska.
+
+5. Obsługa sygnałów
+
+    ft_signals_main() – ustawia reakcję na SIGINT (Ctrl+C) i SIGQUIT (Ctrl+) w głównym shellu.
+
+    ft_signals_child() – ustawia domyślne zachowanie w procesach potomnych.
+
+6. Narzędzia (utils)
+
+    skip_spaces() – pomija białe znaki w stringu.
+
+    ft_strjoin_free() – łączy stringi i zwalnia pamięć.
+
+    ft_split_quotes() – split po spacji z uwzględnieniem cudzysłowów.
+
+    ft_error(char *msg) – wypisuje błąd na stderr.
